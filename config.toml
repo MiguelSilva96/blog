@@ -1,10 +1,11 @@
-baseURL = "http://miguelsilva96.github.io/"
+baseURL = "https://miguelsilva96.github.io/blog/"
 languageCode = "en-us"
 title = "My Blog"
 theme = "dream"
 defaultContentLanguage = "en"
 googleAnalytics = "UA-135058141-1"
 disqusShortname = "my-blog-1gaaypq3yv"
+
 [params]
   author = "Miguel Silva"
   description = "Miguel Silva"
@@ -20,4 +21,4 @@ disqusShortname = "my-blog-1gaaypq3yv"
 
   paginate = 4
 
-  favicon = "favicon.ico"
+  favicon = "/blog/favicon.ico"

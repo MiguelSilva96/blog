@@ -21,4 +21,4 @@ But there is room for some wild topics. I like to read and watch tv series, so t
 Let's just hope this isn't the only post here.
 
 As this is my first post and I don't know what to write, I'll just paste a sunrise picture here to make it seem longer.
-<img src="/sunrise.jpg" style="width=100px"/>
+<img src="/blog/sunrise.jpg" style="width=100px"/>
