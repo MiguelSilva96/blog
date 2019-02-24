@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on My Blog</title>
-    <link>miguelsilva96.github.io/blog/categories/</link>
+    <link>https://miguelsilva96.github.io/blog/categories/</link>
     <description>Recent content in Categories on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="miguelsilva96.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://miguelsilva96.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Random</title>
-      <link>miguelsilva96.github.io/blog/categories/random/</link>
+      <link>https://miguelsilva96.github.io/blog/categories/random/</link>
       <pubDate>Sun, 24 Feb 2019 01:20:45 +0000</pubDate>
       
-      <guid>miguelsilva96.github.io/blog/categories/random/</guid>
+      <guid>https://miguelsilva96.github.io/blog/categories/random/</guid>
       <description></description>
     </item>
     
