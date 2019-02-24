@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on My Blog</title>
-    <link>http://miguelsilva96.github.io/tags/</link>
+    <link>http://miguelsilva96.github.io/blog/tags/</link>
     <description>Recent content in Tags on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 24 Feb 2019 01:20:45 +0000</lastBuildDate>
     
-	<atom:link href="http://miguelsilva96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://miguelsilva96.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Firstpost</title>
-      <link>http://miguelsilva96.github.io/tags/firstpost/</link>
+      <link>http://miguelsilva96.github.io/blog/tags/firstpost/</link>
       <pubDate>Sun, 24 Feb 2019 01:20:45 +0000</pubDate>
       
-      <guid>http://miguelsilva96.github.io/tags/firstpost/</guid>
+      <guid>http://miguelsilva96.github.io/blog/tags/firstpost/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sunrise</title>
-      <link>http://miguelsilva96.github.io/tags/sunrise/</link>
+      <link>http://miguelsilva96.github.io/blog/tags/sunrise/</link>
       <pubDate>Sun, 24 Feb 2019 01:20:45 +0000</pubDate>
       
-      <guid>http://miguelsilva96.github.io/tags/sunrise/</guid>
+      <guid>http://miguelsilva96.github.io/blog/tags/sunrise/</guid>
       <description></description>
     </item>
     
