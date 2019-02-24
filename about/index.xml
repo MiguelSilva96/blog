@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Abouts on My Blog</title>
-    <link>miguelsilva96.github.io/about/</link>
+    <link>miguelsilva96.github.io/blog/about/</link>
     <description>Recent content in Abouts on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="miguelsilva96.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="miguelsilva96.github.io/blog/about/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>miguelsilva96.github.io/about/desc/</link>
+      <link>miguelsilva96.github.io/blog/about/desc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>miguelsilva96.github.io/about/desc/</guid>
+      <guid>miguelsilva96.github.io/blog/about/desc/</guid>
       <description>My name is Miguel Silva and I am 22 years old. I am currently attending the 5th year of the integrated MSc in Informatics Engineering at the University of Minho and also working as a Software Developer. My main goal is to apply my skills in projects and learn, gain experience, enlarging my skill set. I want to focus on developing robust and useful software. In my free time I usually read, run, watch some tv series or movies and spend time with my friends and family.</description>
     </item>
     
