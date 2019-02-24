@@ -3,56 +3,56 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/post/whatisthis/</loc>
+    <loc>miguelsilva96.github.io/post/whatisthis/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/about/desc/</loc>
+    <loc>miguelsilva96.github.io/about/desc/</loc>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/about/</loc>
+    <loc>miguelsilva96.github.io/about/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/categories/</loc>
+    <loc>miguelsilva96.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/tags/firstpost/</loc>
-    <lastmod>2019-02-24T01:20:45+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://miguelsilva96.github.io/blog/</loc>
+    <loc>miguelsilva96.github.io/tags/firstpost/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/post/</loc>
+    <loc>miguelsilva96.github.io/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/categories/random/</loc>
+    <loc>miguelsilva96.github.io/post/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/tags/sunrise/</loc>
+    <loc>miguelsilva96.github.io/categories/random/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://miguelsilva96.github.io/blog/tags/</loc>
+    <loc>miguelsilva96.github.io/tags/sunrise/</loc>
+    <lastmod>2019-02-24T01:20:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>miguelsilva96.github.io/tags/</loc>
     <lastmod>2019-02-24T01:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
