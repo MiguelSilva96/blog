@@ -1,0 +1,23 @@
+baseURL = "http://miguelsilva96.github.io/"
+languageCode = "en-us"
+title = "My Blog"
+theme = "dream"
+defaultContentLanguage = "en"
+googleAnalytics = "UA-135058141-1"
+disqusShortname = "my-blog-1gaaypq3yv"
+[params]
+  author = "Miguel Silva"
+  description = "Miguel Silva"
+  avatar = "https://avatars0.githubusercontent.com/u/17620008?v=4"
+  motto = "Go do stuff."
+
+  email = "miguelsilvalac15@gmail.com"
+  github = "miguelsilva96"
+  linkedin = "miguel-silva-3a2a88154"
+
+  siteStartYear = 2019
+  aboutHeader = "About"
+
+  paginate = 4
+
+  favicon = "favicon.ico"
