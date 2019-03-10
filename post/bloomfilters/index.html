@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+Bloom Filters
+</title>
+
+  
+  
+  <meta name="author" content="Miguel Silva" />
+  <meta name="description" content="What are Blom Filters and when it makes sense to use them.
+" />
+
+
+
+<link href="/blog/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+<meta name="generator" content="Hugo 0.54.0" />
+
+
+<link rel="canonical" href="https://miguelsilva96.github.io/blog/post/bloomfilters/" />
+<link rel="alternative" href="/blog/index.xml" title="My Blog" type="application/atom+xml" />
+
+<link href="/blog/css/semantic.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/blog/css/site.css" />
+
+
+</head>
+
+<body>
+  <div class="flip-container">
+    <div class="flipper">
+      <section class="front">
+        
+<nav class="ui top secondary menu">
+  <div class="item">
+    <i class="inverted big link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <a href="/blog">
+      <i class="inverted big link home icon" title="Home"></i>
+    </a>
+  </div>
+</nav>
+ 
+<div class="ui centered grid">
+  <div class="fifteen wide mobile fifteen wide tablet eleven wide computer column post-list post-single-main">
+
+    <section class="ui secondary top attached black segment">
+      <a class="ui black right corner label" href="javascript:void(0)" onclick="savePostAsImg()">
+        <i class="save icon"></i>
+      </a>
+      <header>
+        <h1 class="ui header">
+          Bloom Filters
+          <div class="sub header">@ Miguel Silva · Mar 9, 2019 · 4 min read · Update at Mar 9, 2019</div>
+        </h1>
+      </header>
+      <article class="post-content" style="margin-top: 2rem; font-size: 1.4rem;"><p>What are Blom Filters and when it makes sense to use them.</p>
+
+<h2 id="what-is-a-bloom-filter-it-s-not-a-hot-dog-silicon-valley">What is a bloom filter? It&rsquo;s not a hot dog. (Silicon Valley 😂)</h2>
+
+<p>A bloom filter is a memory efficient data structure that allows inserting elements in a set and checking if an element already exists.
+It was developed and published by Burton Howard Bloom in 1970.</p>
+
+<p>To start you can imagine a hashtable, which allows you to check if an element exists, using the key. The hashtable stores the key and the value of each element, but a bloom filter does not. That makes the bloom filter memory efficient but useless if you need to store the data, right? Not really. You can have the data stored in another data structure in-memory or in a database and also have the bloom filter to execute the &ldquo;<em>exists</em>&rdquo; operation without going through each element. This is particularly interesting when you have a large amount of data.</p>
+
+<p>It is important to note that with this data structure it is possible to get false positives but false negatives never happen.
+As it is possible to get false positives, this data structure is probablistic and the &ldquo;<em>exists</em>&rdquo; operation has two possible outcomes:</p>
+
+<ul>
+<li>The element is <strong>possibly</strong> in the set.</li>
+<li>The element is definetely not in the set.</li>
+</ul>
+
+<p>The key feature here is that there are no false negatives, ensuring there will be no duplicates when using a bloom filter.
+The probability of false positives will be briefly addressed later on.</p>
+
+<h2 id="but-how-does-it-work">But how does it work?</h2>
+
+<p>The bloom filter&rsquo;s structure is very basic. It is just an array of <strong>m</strong> bits.
+It is also necessary to define/use <strong>k</strong> hash functions. These hash functions will be used to get <strong>k</strong> positions
+for each element that is inserted in the bloom filter. The output of the hash functions defines the positions in the array that will be set to 1.</p>
+
+<p>When querying if an element exists, the same <strong>k</strong> hash functions are applied and if all the positions are set to 1, the algorithm
+will return &ldquo;The element is <strong>possibly</strong> in the set&rdquo;. In the following figure, you can see that <strong>m=16</strong> and <strong>k=3</strong>.
+That means that there are 3 hash functions whose results are used to fill 3 positions of the buffer for each element.
+The top elements were inserted into the bloom filter and set the corresponding bits to 1. The <strong>w</strong> element is being used to query if
+it is already present in the set. The result here would be no because one of the bits is 0.</p>
+
+<p><img src="/blog/wikiBloom.png"><a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia</a></img></p>
+
+<h3 id="what-is-the-probability-of-false-positives-how-many-hash-functions-should-i-use">What is the probability of false positives? How many hash functions should I use?</h3>
+
+<p>Here I will just show you the formulas because this post is intended to be just an introduction to bloom filters.
+If you are curious, you can check <a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia</a> for a detailed proof.
+The probability is defined by the following formula: (<strong>n=&ldquo;Number of elements&rdquo;</strong>)
+<img src="/blog/probFalsePositives.png"/></p>
+
+<p>Given this probability, there is also an ideal number of hash functions to minimize it, depending on the size of the array and the number of elements.
+It&rsquo;s intuitive that if we use too many hash functions the buffer will be filled quickly and the collisions will increase. On the
+other hand, if we use too few, it is also possible that the collisions increase because the chances of collision for the output of the hash functions are greater.
+The ideal number of hash functions is defined by the following formula, considering <strong>m</strong> and the number of elements: (<strong>n=&ldquo;Number of elements&rdquo;</strong>)
+<img src="/blog/idealHash.png"/></p>
+
+<h3 id="removing-elements">Removing elements</h3>
+
+<p>Removing items is not specified in the definition of a Bloom Filter. It is not hard to implement the removal of an element but probably you don&rsquo;t want it, because removing one element might affect other elements. Removing an element would be done by setting all the bits in the corresponding positions to 0. Some of those bits might also have been set by other elements. So, by removing one element you might also be removing elements you don&rsquo;t plan to.</p>
+
+<h3 id="time-complexity">Time complexity</h3>
+
+<p>Inserting and testing an element&rsquo;s existence are constant-time operations, assuming O(1) hash functions.</p>
+
+<p>Hope you enjoyed this post, suggestions are welcome. ☺</p></article>
+    </section>
+
+    <footer class="ui secondary attached segment dream-tags">
+      
+      
+      <a class="ui label" href="/blog/tags/software" title="software">software</a>
+      
+      <a class="ui label" href="/blog/tags/data-structures" title="data structures">data structures</a>
+      
+      <a class="ui label" href="/blog/tags/memory" title="memory">memory</a>
+      
+      
+    </footer>
+
+    
+
+    
+    <footer class="ui secondary bottom attached stacked segment post-disqus-area" data-html2canvas-ignore="true">
+      <div id="disqus_thread"></div>
+      <script>
+      
+
+      
+
+
+      var disqus_config = function () {
+      this.page.url = 'https:\/\/miguelsilva96.github.io\/blog\/post\/bloomfilters\/';  
+      this.page.identifier = '\/blog\/post\/bloomfilters\/'; 
+      };
+
+      (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + 'my-blog-1gaaypq3yv' + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </footer>
+    
+
+  </div>
+  <div class="fifteen wide mobile fifteen wide tablet four wide computer column">
+
+    <section class="ui top attached center aligned inverted segment">
+  <div class="ui small circular image">
+    
+    <img src="https://avatars0.githubusercontent.com/u/17620008?v=4">
+    
+  </div>
+  <h3 class="ui header">Miguel Silva&#39;s blog<div class="sub header" style="color: white;">Go do stuff.</div>
+  </h3>
+
+  <div class="ui inverted horizontal list">
+    
+    <a class="item" href="/blog/post">
+      <i class="archive icon" title="Archives"></i>
+    </a>
+    
+    <a class="item" href="/blog/tags">
+      <i class="tags icon" title="All Tags"></i>
+    </a>
+    <a class="item" href="/blog/categories">
+      <i class="inverted cubes icon" title="All Categories"></i>
+    </a>
+  </div>
+
+  <a id="tag-category-pop" class="ui red right corner label">
+    <i class="pointing down icon" title="Click this to pop tags and categories"></i>
+  </a>
+</section>
+
+
+<section class="ui attached center aligned inverted segment dream-header-tags dream-tags">
+  
+  <a class="ui label" href="/blog/tags/data-structures" title="data-structures">data-structures</a>
+  
+  <a class="ui label" href="/blog/tags/firstpost" title="firstpost">firstpost</a>
+  
+  <a class="ui label" href="/blog/tags/memory" title="memory">memory</a>
+  
+  <a class="ui label" href="/blog/tags/software" title="software">software</a>
+  
+  <a class="ui label" href="/blog/tags/sunrise" title="sunrise">sunrise</a>
+  
+</section>
+
+
+
+<section class="ui attached inverted segment dream-categories">
+  <div class="ui inverted accordion">
+    
+    <div class="title">
+      <i class="dropdown icon"></i>
+      <a href="/blog/categories/data-structures" class="item" style="color: white;">data-structures</a>
+    </div>
+    <div class="content">
+      <div class="ui link inverted list">
+      
+      <div class="item" style="padding-left: 24px;">
+        <i class="cocktail icon"></i>
+        <div class="content">
+          <a href="https://miguelsilva96.github.io/blog/post/bloomfilters/" class="item">Bloom Filters</a>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+    
+    <div class="title">
+      <i class="dropdown icon"></i>
+      <a href="/blog/categories/random" class="item" style="color: white;">random</a>
+    </div>
+    <div class="content">
+      <div class="ui link inverted list">
+      
+      <div class="item" style="padding-left: 24px;">
+        <i class="cocktail icon"></i>
+        <div class="content">
+          <a href="https://miguelsilva96.github.io/blog/post/whatisthis/" class="item">What is this?</a>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="ui bottom attached center aligned inverted segment">
+    
+    <p>© 2019 My Blog</p>
+    
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+</section>
+
+
+  </div>
+</div>
+
+      </section>
+      <section class="back">
+        <nav class="ui top secondary menu" style="overflow-x: auto">
+  <div class="item">
+    <i class="inverted big link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  
+  <div class="item">
+    <a href="mailto:miguelsilvalac15@gmail.com">
+      <i class="inverted big mail icon" title="email"></i>
+    </a>
+  </div>
+  
+  
+  <div class="item">
+    <a href="https://github.com/miguelsilva96" target="_blank">
+      <i class="inverted big github icon" title="github"></i>
+    </a>
+  </div>
+  
+  
+  <div class="item">
+    <a href="https://www.linkedin.com/in/miguel-silva-3a2a88154" target="_blank">
+      <i class="inverted big linkedin icon" title="linkedin"></i>
+    </a>
+  </div>
+  
+  
+  
+</nav>
+
+<div class="ui centered grid about">
+  <div class="fifteen wide mobile fifteen wide tablet fifteen wide computer column">
+
+    <section class="ui stacked segments">
+      <header class="ui inverted segment">
+        <h2 class="ui header">
+          About
+        </h2>
+      </header>
+
+      <article class="ui inverted segment back-about">
+        <div class="ui stackable three column grid">
+          <div class="column">
+              
+              <p>My name is Miguel Silva and I am 22 years old. I am currently attending the 5th year of the integrated MSc in Informatics Engineering at the University of Minho and also working as a Software Developer. My main goal is to apply my skills in projects and learn, gain experience, enlarging my skill set. I want to focus on developing robust and useful software. In my free time I usually read, run, watch some tv series or movies and spend time with my friends and family.</p>
+
+<p>Checkout my website: <a href="https://miguelsilva96.github.io">https://miguelsilva96.github.io</a></p>
+
+              
+          </div>
+          <div class="column">
+              
+          </div>
+          <div class="column">
+              
+          </div>
+        </div>
+      </article>
+
+      
+
+      
+      
+    </section>
+
+  </div>
+</div>
+
+      </section>
+    </div>
+  </div>
+
+  
+<script src="/blog/js/jquery.min.js"></script>
+<script src="/blog/js/semantic.min.js"></script>
+<script src="/blog/js/html2canvas.min.js"></script>
+<script src="/blog/js/bg.js"></script>
+<script src="/blog/js/site.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-135058141-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+
+</html>

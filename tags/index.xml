@@ -6,10 +6,19 @@
     <description>Recent content in Tags on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Feb 2019 01:20:45 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 19:37:46 +0000</lastBuildDate>
     
 	<atom:link href="https://miguelsilva96.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Structures</title>
+      <link>https://miguelsilva96.github.io/blog/tags/data-structures/</link>
+      <pubDate>Sat, 09 Mar 2019 19:37:46 +0000</pubDate>
+      
+      <guid>https://miguelsilva96.github.io/blog/tags/data-structures/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Firstpost</title>
@@ -17,6 +26,24 @@
       <pubDate>Sun, 24 Feb 2019 01:20:45 +0000</pubDate>
       
       <guid>https://miguelsilva96.github.io/blog/tags/firstpost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memory</title>
+      <link>https://miguelsilva96.github.io/blog/tags/memory/</link>
+      <pubDate>Sat, 09 Mar 2019 19:37:46 +0000</pubDate>
+      
+      <guid>https://miguelsilva96.github.io/blog/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Software</title>
+      <link>https://miguelsilva96.github.io/blog/tags/software/</link>
+      <pubDate>Sat, 09 Mar 2019 19:37:46 +0000</pubDate>
+      
+      <guid>https://miguelsilva96.github.io/blog/tags/software/</guid>
       <description></description>
     </item>
     

@@ -6,10 +6,19 @@
     <description>Recent content on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Feb 2019 01:20:45 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 19:37:46 +0000</lastBuildDate>
     
 	<atom:link href="https://miguelsilva96.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bloom Filters</title>
+      <link>https://miguelsilva96.github.io/blog/post/bloomfilters/</link>
+      <pubDate>Sat, 09 Mar 2019 19:37:46 +0000</pubDate>
+      
+      <guid>https://miguelsilva96.github.io/blog/post/bloomfilters/</guid>
+      <description>&lt;p&gt;What are Blom Filters and when it makes sense to use them.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>What is this?</title>
