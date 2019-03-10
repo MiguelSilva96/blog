@@ -3,7 +3,7 @@ title: What is this?
 date: 2019-02-24T01:20:45Z
 lastmod: 2019-02-24T01:20:45Z
 author: Miguel Silva
-cover: sunrise.jpg
+cover: /blog/sunrise.jpg
 categories: ["random"]
 tags: ["firstpost", "sunrise"]
 draft: false
