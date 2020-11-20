@@ -4,7 +4,7 @@ date: 2020-11-15T19:37:46Z
 lastmod: 2020-11-15T19:37:46Z
 author: Miguel Silva
 cover: /blog/tasks.jpg
-categories: ["backend dev"]
+categories: ["backend-dev"]
 tags: ["software", "API", ".NET Core", "backend", "job scheduling"]
 draft: true
 ---
@@ -17,7 +17,24 @@ FluentScheduler is an automated job scheduler with fluent interface for the .NET
 In this post we will focus on using this scheduler specifically in .NET Core.
 
 With FluentScheduler you have to configure the jobs you want to run. For this purpose you usually have to options:
-Create a registry that you provide on initialization or else add jobs after initializing.
+Create a registry that you provide on initialization or else add jobs after initializing. The initialization should be called once, usually when the program starts.
+
+```csharp
+    // ... under main for example
+
+    // FIRST APPROACH
+    JobManager.Initialize();
+    // and then you can add jobs to it
+    JobManager.AddJob(() => Console.WriteLine("job!"), (s) => s.ToRunEvery(5).Seconds());
+    // -------------------------
+    // OR
+    // -------------------------
+    // SECOND APPROACH
+    JobManager.Initialize(registry);
+    // But, what is this registry?
+```
+
+Now, the registry is a class provided by the FluentScheduler library that allows you to schedule jobs. When you call AddJob as in the above example, all you are doing is adding a Job to the existing registry that was created on Initialize(). You have the option of passing a registry instance as a parameter on initialize and that will be the registry used. You can use a registry with all the jobs you need already registered. You can create a registry and schedule jobs or else, you can create a class that inherits from Registry and schedules all your jobs:
 
 ```csharp
 using FluentScheduler;
@@ -47,17 +64,16 @@ public class MyRegistry : Registry
 }
 ```
 
-
-For the first option you need to can a Registry class that inherits from Registry in the library and schedule all your intended tasks in the constructor.
-The second option is adding after initializing, by simply calling AddJob.
+As you can see, there are multiple ways you can schedule a job, these examples were retrieved from the FluentScheduler docs. Now that you have a registry, you can understand what is the registry in the second approach of the first example. That registry could be as follows:
 
 ```csharp
-JobManager.AddJob(() => Console.WriteLine("Late job!"), (s) => s.ToRunEvery(5).Seconds());
+    var registry = new MyRegistry();
+    JobManager.Initialize(registry);
+    // All the jobs in the MyRegistry constructor are now scheduled
 ```
 
+
 When scheduling a job you have three options, using actions, specifying which job to create or create the job in an action. 
-To better understand, here are some examples:
-...
 
 ## Dependency injection in .NET Core
 
@@ -110,3 +126,40 @@ public class Startup
 }
 ```
 
+Notice that we added a custom job to our DI container because we want it to be created by the container so that its dependencies (dbcontext, services, etc) are injected. Also, notice that this time in our MyRegistry class the constructor receives the Application Services as an argument, let's understand why that is needed.
+
+```csharp
+public class MyRegistry : Registry
+{
+    // Inject the application service provider using pure DI.
+    // (see Startup.cs code example)
+    public MyRegistry(IServiceProvider sp)
+    {
+        // Use the service provider to retrieve an instance of the job.
+        // If the job depends on a DbContext instance, create a scope and
+        // use its service provider, so that each job gets a unique DbContext.
+        Schedule(() => sp.CreateScope().ServiceProvider
+                         .GetRequiredService<MyJob>())
+                         .ToRunNow().AndEvery(5).Minutes();
+    }
+}
+```
+
+Let's have a look at what the MyJob job looks like:
+
+```csharp
+public class MyJob : IJob
+{
+    private readonly string _id;
+
+    public MyJob(IExampleService service)
+    {
+        _id = Utils.ShortId();
+        Console.WriteLine("Hello from MyJob");
+    }
+    public void Execute()
+    {
+        Console.WriteLine("Hello from MyJob executing");
+    }
+}
+```
